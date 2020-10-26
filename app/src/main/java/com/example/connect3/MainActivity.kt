@@ -4,16 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import com.example.connect3.R.drawable.yellow
 
 class MainActivity : AppCompatActivity() {
+
+    var activePlayer = 0
 
     fun dropIn(view: View) {
 
         var counter = view as ImageView
 
         counter.translationY = -1500f
-        counter.setImageResource(yellow)
+
+        if (activePlayer == 0) {
+            counter.setImageResource(R.drawable.yellow)
+        }
+        else {
+            counter.setImageResource(R.drawable.red)
+        }
+        activePlayer = (activePlayer + 1) % 2
+
         counter.animate().translationYBy(1500f).rotation(3600f).duration = 1000
 
     }
