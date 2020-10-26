@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
             counter.setImageDrawable(null)
         }
 
-        for (i in 0 until boardState.size) {
+        for (i in boardState.indices) {
             boardState[i] = BoardStates.EMPTY
         }
 
