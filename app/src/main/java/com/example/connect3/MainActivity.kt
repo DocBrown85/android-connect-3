@@ -3,8 +3,8 @@ package com.example.connect3
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
+import androidx.gridlayout.widget.GridLayout
 
 enum class BoardStates {
     EMPTY,
@@ -68,12 +68,42 @@ class MainActivity : AppCompatActivity() {
                         "Red"
                     }
 
-                    Toast.makeText(this, "$winner Won!", Toast.LENGTH_SHORT).show()
+                    val winnerTextView = findViewById<TextView>(R.id.winnerTextView)
+                    val playAgainButton = findViewById<Button>(R.id.playAgainButton)
+
+                    winnerTextView.text = "$winner Won!"
+                    winnerTextView.visibility = View.VISIBLE
+                    playAgainButton.visibility = View.VISIBLE
 
                 }
             }
 
         }
+
+    }
+
+    fun playAgain(view: View) {
+
+        val winnerTextView = findViewById<TextView>(R.id.winnerTextView)
+        val playAgainButton = findViewById<Button>(R.id.playAgainButton)
+        val gridLayout = findViewById<GridLayout>(R.id.gridLayout)
+
+        winnerTextView.text = ""
+        winnerTextView.visibility = View.INVISIBLE
+        playAgainButton.visibility = View.INVISIBLE
+
+        for (i in 0 until gridLayout.childCount) {
+            val counter: ImageView = gridLayout.getChildAt(i) as ImageView
+            counter.setImageDrawable(null)
+        }
+
+        for (i in 0 until boardState.size) {
+            boardState[i] = BoardStates.EMPTY
+        }
+
+        activePlayer = BoardStates.PLAYER_0
+
+        gameIsActive = true
 
     }
 
